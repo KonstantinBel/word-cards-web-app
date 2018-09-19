@@ -1,0 +1,50 @@
+.wrapper {
+  margin: 0 auto;
+  width: 300px;
+}
+
+.main-header {
+  text-align: center;
+}
+
+.main-menu {
+  border: 1px black solid;
+  padding: 10px;
+}
+
+.main-menu_header {
+  text-align: center;
+  margin: 7px 0
+}
+
+.main-menu__list {
+  list-style: none;
+  margin: 7px 0;
+  padding: 0;
+}
+
+.main-menu__item {
+  display: inline;
+  margin: 0 10px;
+}
+
+.user-menu {
+  border: 1px black solid;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+.user-menu > * {
+  display: inline;
+  margin: 0 5px;
+}
+
+.main-content {
+  border: 1px black solid;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+.form-error {
+  color: red;
+}

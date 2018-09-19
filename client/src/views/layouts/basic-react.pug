@@ -1,0 +1,18 @@
+doctype html
+html
+  head
+    block title
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    meta(http-equiv="X-UA-Compatible" content="ie=edge")
+    block css_head
+  body
+    if devMode
+      div(style={background: 'wheat', 'font-style': 'italic'}) Server running in development mode
+
+    block content
+    script(src="/common-script.js")
+    script(crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/16.4.2/umd/react.development.js")
+    script(crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.4.2/umd/react-dom.development.js")
+    script(crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-router-dom/4.3.1/react-router-dom.js")
+    block js_bottom

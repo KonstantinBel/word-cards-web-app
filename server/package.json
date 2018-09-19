@@ -1,0 +1,39 @@
+{
+  "name": "default_project_server",
+  "version": "1.0.0",
+  "author": "Bartzlo",
+  "license": "ISC",
+  "scripts": {
+    "prod": "node ./bin/www",
+    "prod_reset_db": "node ./bin/www prod reset_db",
+    "dev": "nodemon ./bin/www dev",
+    "dev_reset_db": "nodemon ./bin/www dev reset_db"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "bluebird": "^3.5.1",
+    "body-parser": "~1.18.2",
+    "connect-session-sequelize": "^5.2.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "dotenv": "^5.0.1",
+    "eslint": "^4.19.1",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.10.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.7.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "morgan": "~1.9.0",
+    "mysql2": "^1.5.3",
+    "nocache": "^2.0.0",
+    "nodemon": "^1.17.3",
+    "passport": "^0.4.0",
+    "passport-google-oauth": "^1.0.0",
+    "passport-local": "^1.0.0",
+    "pug": "^2.0.3",
+    "sequelize": "^4.37.6",
+    "serve-favicon": "~2.4.5"
+  }
+}

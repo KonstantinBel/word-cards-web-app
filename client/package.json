@@ -1,0 +1,36 @@
+{
+  "name": "default_project_client",
+  "version": "1.0.0",
+  "scripts": {
+    "prod": "webpack",
+    "dev": "webpack --env.mode=dev"
+  },
+  "author": "Bartzlo",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "clean-webpack-plugin": "^0.1.19",
+    "copy-webpack-plugin": "^4.5.1",
+    "css-loader": "^0.28.11",
+    "dotenv": "^5.0.1",
+    "eslint": "^4.19.1",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.10.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.7.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "file-loader": "^1.1.11",
+    "node-sass": "^4.8.3",
+    "normalize.css": "^8.0.0",
+    "path": "^0.12.7",
+    "sass-loader": "^6.0.7",
+    "style-loader": "^0.20.3",
+    "uglifyjs-webpack-plugin": "^1.2.4",
+    "webpack": "^3.0.0"
+  }
+}

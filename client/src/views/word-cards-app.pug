@@ -1,0 +1,14 @@
+extends layouts/basic-react.pug
+
+block title
+  title React app
+
+block css_head
+  link(rel="stylesheet", href="/word-cards-app.css")
+
+block content
+  p Статическая обвязка основного приложения
+  div#root
+
+block js_bottom
+  script(src='/word-cards-app.js')
