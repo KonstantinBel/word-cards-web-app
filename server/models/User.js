@@ -23,7 +23,7 @@ module.exports = function (sequelize, DataTypes) {
     password: DataTypes.STRING,
     google_name: DataTypes.STRING,
     google_id: DataTypes.STRING,
-    google_token: DataTypes.STRING
+    google_token: DataTypes.STRING,
   })
 
   User.beforeSave((user, options) => {
@@ -36,13 +36,9 @@ module.exports = function (sequelize, DataTypes) {
     }
   })
 
-  /**
-   * Associate example
-  */
-
-  // User.associate = (models) => {
-  //   User.belongsTo(models.Article)
-  // }
+  User.associate = (models) => {
+    User.belongsToMany(models.Desc, {through: 'UserDesc'})
+  }
 
   return User
 }

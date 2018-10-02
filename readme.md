@@ -1,7 +1,10 @@
 ## Required
 - node ^8.9.4
 - npm ^5.6.0
-- mysql
+- postgresql (ALTER ROLE user_name SET search_path TO public)
+
+## Style guide
+https://github.com/airbnb/javascript/tree/master/react
 
 ## After cloning
 You need to create .env files in server directory
@@ -21,6 +24,5 @@ SESSION_SECRET=qweqwe (for example)
 ```
 
 ## Starting
-- start mysql server
 - npm run dev/prod (in server dir, running server in development or production mode)
 - npm run dev/prod (in client dir, running wrontend building in development or production mode)

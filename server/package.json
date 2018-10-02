@@ -7,7 +7,8 @@
     "prod": "node ./bin/www",
     "prod_reset_db": "node ./bin/www prod reset_db",
     "dev": "nodemon ./bin/www dev",
-    "dev_reset_db": "nodemon ./bin/www dev reset_db"
+    "dev_reset_db": "nodemon ./bin/www dev reset_db",
+    "set_demo_data": "nodemon ./bin/www dev reset_db set_demo_data"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -26,12 +27,12 @@
     "express": "^4.16.3",
     "express-session": "^1.15.6",
     "morgan": "~1.9.0",
-    "mysql2": "^1.5.3",
     "nocache": "^2.0.0",
     "nodemon": "^1.17.3",
     "passport": "^0.4.0",
     "passport-google-oauth": "^1.0.0",
     "passport-local": "^1.0.0",
+    "pg": "^7.4.3",
     "pug": "^2.0.3",
     "sequelize": "^4.37.6",
     "serve-favicon": "~2.4.5"

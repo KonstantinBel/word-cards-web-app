@@ -2,16 +2,20 @@ const Sequelize = require('sequelize')
 const fs = require('fs')
 const path = require('path')
 const basename = path.basename(module.filename)
+const resetDb = global.RESET_DB
+const setDemoData = global.SET_DEMO_DATA
 let db = {}
+
+console.log('Start db init')
 
 /**
  * Sequelize connection settings
  */
-
+ 
 const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, {
   host: process.env.DB_HOST,
   port: process.env.DB_PORT,
-  dialect: 'mysql',
+  dialect: 'postgres',
   operatorsAliases: false,
   logging: false,
 
@@ -26,8 +30,6 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
     timestamps: false
   }
 })
-
-db.sequelize = sequelize
 
 /**
  * Add all models to db from files in models dir
@@ -52,4 +54,25 @@ for (const key in db) {
   }
 }
 
+db.init = function () {
+  return sequelize
+    .authenticate()
+    .then(() => resetDb ? sequelize.drop() : Promise.resolve)
+    .then(() => this.Session.sync())
+    .then(() => this.User.sync())
+    .then(() => this.Rubric.sync())
+    .then(() => this.Desc.sync())
+    .then(() => this.Word.sync())
+    .then(() => this.Language.sync())
+    .then(() => sequelize.sync())
+    .then(() => resetDb && setDemoData ? require('../default-data')(this) : Promise.resolve) // настроит кодировку или перейти на postgre
+    .then(() => {
+      console.log('DB connection has been established successfully.')
+    })
+    .catch(err => {
+      console.error('Unable to connect to the database:', err)
+    })
+}
+
+db.sequelize = sequelize
 module.exports = db

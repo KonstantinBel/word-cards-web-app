@@ -6,6 +6,7 @@ require('dotenv').config()
 // set globales args
 global.DEV = process.argv[2] == 'dev'
 global.RESET_DB = process.argv[3] == 'reset_db'
+global.SET_DEMO_DATA = process.argv[4] == 'set_demo_data'
 
 const app = require('../app')
 const debug = require('debug')('server:server')
@@ -73,8 +74,5 @@ function onListening () {
     ? 'pipe ' + addr
     : 'port ' + addr.port
   debug('Listening on ' + bind)
-
-  console.log('\n***************************************************')
   console.log('Server is listening ' + bind + dev)
-  console.log('***************************************************\n')
 }
