@@ -16,7 +16,6 @@ module.exports = (env) => {
 
   return {
     entry: {
-      'word-cards-app': './src/react/word-cards-app/word-cards-app.jsx',
       'common-script': './src/views/layouts/common-script.js',
     },
 
@@ -26,10 +25,9 @@ module.exports = (env) => {
     },
 
     resolve: {
-      extensions: ['.js', '.jsx'],
+      extensions: ['.js'],
       modules: [
         path.resolve('./node_modules'),
-        path.resolve('./src/react'),
         path.resolve('./src/static')
       ]
     },
@@ -37,7 +35,7 @@ module.exports = (env) => {
     module: {
       rules: [
         {
-          test: /\.(jsx|js)$/,
+          test: /\.js$/,
           exclude: /node_modules/,
           loader: 'babel-loader'
         },

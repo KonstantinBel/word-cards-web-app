@@ -1,10 +1,4 @@
 module.exports = {
-    "globals": {
-        "ReactDOM": false,
-        "React": false,
-        "DEV": false,
-        "ReactRouterDOM": false
-    },
     "extends": "standard",
     "rules": {
         "indent": [

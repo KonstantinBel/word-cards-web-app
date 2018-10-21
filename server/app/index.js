@@ -6,7 +6,7 @@ const session = require('express-session')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const logger = require('morgan')
-const accessLogStream = fs.createWriteStream(path.join(__dirname, '../access.log'), {flags: 'a'})
+const accessLogStream = fs.createWriteStream(path.join(global.PROJECT_DIR, '/server/access.log'), {flags: 'a'})
 const nocache = require('nocache')
 const favicon = require('serve-favicon')
 const SequelizeStore = require('connect-session-sequelize')(session.Store)
@@ -26,10 +26,19 @@ db.init().then(() => {
   require('./init-passport')
 
   // init viwes engine
-  app.set('views', path.join(__dirname, '../../client/src/views/'))
+  app.set('views', path.join(global.PROJECT_DIR, '/client/src/views/'))
   app.set('view engine', 'pug')
 
   // inti app middlewares
+  app.use(function(req, res, next) {
+    const originCong = process.env.ACCESS_CONTROL_ALLOW_ORIGIN;
+    if (originCong && originCong.indexOf(req.headers.origin) >= 0) {
+      res.header('Access-Control-Allow-Origin', req.headers.origin);
+      res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+      res.header('Access-Control-Allow-Credentials', 'true');
+    }
+    next();
+  });
   app.use(cookieParser())
   global.DEV && app.use(nocache())
   global.DEV || app.use(logger('combined', {stream: accessLogStream}))
@@ -49,8 +58,7 @@ db.init().then(() => {
   }))
   app.use(passport.initialize())
   app.use(passport.session())
-  app.use(favicon(path.join(__dirname, '../../client/build/img', 'favicon.ico')))
-  app.use(express.static(path.join(__dirname, '../../client/build')))
+  app.use(favicon(path.join(global.PROJECT_DIR, '/client/build/img', 'favicon.ico')))
   app.use((req, res, next) => {
     res.locals.devMode = 'global.DEV'
     next()
@@ -75,7 +83,7 @@ db.init().then(() => {
     if (err instanceof ResponseError) {
       err.print()
     } else {
-      console.log('\n---------unexpected_error--------') 
+      console.log('\n---------unexpected_error--------')
       console.log(err.stack + '\n----------------------------\n')
     }
 

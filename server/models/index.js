@@ -65,7 +65,7 @@ db.init = function () {
     .then(() => this.Word.sync())
     .then(() => this.Language.sync())
     .then(() => sequelize.sync())
-    .then(() => resetDb && setDemoData ? require('../default-data')(this) : Promise.resolve) // настроит кодировку или перейти на postgre
+    .then(() => setDemoData ? require('../default-data')(this) : Promise.resolve) // настроит кодировку или перейти на postgre
     .then(() => {
       console.log('DB connection has been established successfully.')
     })

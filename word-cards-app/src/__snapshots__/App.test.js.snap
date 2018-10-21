@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App есть корректный снимок 1`] = `
+<div>
+  word cards app!
+  <a
+    href="/"
+  >
+    Go to base page
+  </a>
+</div>
+`;
