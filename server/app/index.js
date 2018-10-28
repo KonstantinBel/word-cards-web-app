@@ -37,7 +37,7 @@ db.init().then(() => {
 
   // inti app middlewares
   app.use((req, res, next) => {
-    const originCong = process.env.ACCESS_CONTROL_ALLOW_ORIGIN;
+    const originCong = global.ACCESS_CONTROL_ALLOW_ORIGIN;
     if (originCong && originCong.indexOf(req.headers.origin) >= 0) {
       res.header('Access-Control-Allow-Origin', req.headers.origin);
       res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
@@ -46,13 +46,13 @@ db.init().then(() => {
     next();
   });
   app.use(cookieParser());
-  if (global.DEV) app.use(nocache());
-  if (!global.DEV) app.use(logger('combined', { stream: accessLogStream }));
-  if (global.DEV) app.use(logger('dev'));
+  if (global.DEV_MODE) app.use(nocache());
+  if (!global.DEV_MODE) app.use(logger('combined', { stream: accessLogStream }));
+  if (global.DEV_MODE) app.use(logger('dev'));
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(session({
-    secret: process.env.SESSION_SECRET,
+    secret: global.SESSION_SECRET,
     saveUninitialized: false,
     resave: false,
     store: new SequelizeStore({
@@ -66,7 +66,7 @@ db.init().then(() => {
   app.use(passport.session());
   app.use(favicon(path.join(global.PROJECT_DIR, '/client/build/img', 'favicon.ico')));
   app.use((req, res, next) => {
-    res.locals.devMode = 'global.DEV';
+    res.locals.devMode = global.DEV_MODE;
     next();
   });
   app.use('/api', wordCardsApiRoute);
@@ -101,9 +101,9 @@ db.init().then(() => {
       res.status(status);
       res.send(err.details || {
         type: 'unknown server error',
-        status: global.DEV && status,
-        messae: global.DEV && err.message,
-        stack: global.DEV && err.stack,
+        status: global.DEV_MODE && status,
+        messae: global.DEV_MODE && err.message,
+        stack: global.DEV_MODE && err.stack,
       });
     }
 

@@ -1,80 +1,76 @@
 #!/usr/bin/env node
-const path = require('path')
+require('dotenv').config();
+const path = require('path');
 
-// get env config
-require('dotenv').config()
+global.DEV_MODE = process.argv[2] === 'dev';
+global.RESET_DB = process.argv[3] === 'reset_db';
+global.SET_DEMO_DATA = process.argv[4] === 'set_demo_data';
+global.PROJECT_DIR = path.join(__dirname, '../../');
 
-// set globales args
-global.DEV = process.argv[2] == 'dev'
-global.RESET_DB = process.argv[3] == 'reset_db'
-global.SET_DEMO_DATA = process.argv[4] == 'set_demo_data'
-global.PROJECT_DIR = path.join(__dirname, '../../')
-
-const app = require('../app')
-const debug = require('debug')('server:server')
-const http = require('http')
-
-// get port from environment and store in Express.
-let port = normalizePort(process.env.PORT || '3000')
-app.set('port', port)
-
-// create HTTP server.
-let server = http.createServer(app)
-
-// Listen on provided port, on all network interfaces.
-server.listen(port)
-server.on('error', onError)
-server.on('listening', onListening)
-
-// normalize a port into a number, string, or false.
-function normalizePort (val) {
-  let port = parseInt(val, 10)
-
-  if (isNaN(port)) {
-    // named pipe
-    return val
+[
+  'PORT',
+  'DB_NAME',
+  'DB_USER',
+  'DB_PASS',
+  'DB_HOST',
+  'DB_PORT',
+  'ACCESS_CONTROL_ALLOW_ORIGIN',
+  'GOOGLE_ID',
+  'GOOGLE_SECRET',
+  'OAUTH_CALLBACK_URL',
+  'SESSION_SECRET',
+].forEach((name) => {
+  if (process.env[name]) {
+    global[name] = process.env[name];
+  } else {
+    throw new Error(`Required env not defined: ${name}`);
   }
+});
 
-  if (port >= 0) {
-    // port number
-    return port
-  }
+const debug = require('debug')('server:server');
+const http = require('http');
+const app = require('../app');
 
-  return false
-}
+app.set('port', global.PORT);
+const server = http.createServer(app);
 
 // Event listener for HTTP server "error" event.
-function onError (error) {
+function onError(error) {
   if (error.syscall !== 'listen') {
-    throw error
+    throw error;
   }
 
-  let bind = typeof port === 'string'
-    ? 'Pipe ' + port
-    : 'Port ' + port
+  const bind = typeof port === 'string'
+    ? `Pipe ${global.PORT}`
+    : `Port ${global.PORT}`;
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
-  case 'EACCES':
-    console.error(bind + ' requires elevated privileges')
-    process.exit(1)
-    break
-  case 'EADDRINUSE':
-    console.error(bind + ' is already in use')
-    process.exit(1)
-    break
-  default:
-    throw error
+    case 'EACCES':
+      console.error(`${bind} requires elevated privileges`);
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(`${bind} is already in use`);
+      process.exit(1);
+      break;
+    default:
+      throw error;
   }
 }
 
 // Event listener for HTTP server "listening" event.
-function onListening () {
-  let dev = global.DEV ? ', in development mode' : ' in production mode'
-  let addr = server.address()
-  let bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port
-  debug('Listening on ' + bind)
-  console.log('Server is listening ' + bind + dev)
+function onListening() {
+  const dev = global.DEV_MODE ? ', in development mode' : ' in production mode';
+  const addr = server.address();
+  const bind = typeof addr === 'string'
+    ? `pipe ${addr}`
+    : `port ${addr.port}`;
+  debug(`Listening on ${bind}`);
+  console.log(`Server is listening ${bind}${dev}`);
 }
+
+// Listen on provided port, on all network interfaces.
+server.listen(global.PORT);
+server.on('error', onError);
+server.on('listening', onListening);

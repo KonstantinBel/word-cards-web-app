@@ -1,18 +1,16 @@
-'use strict'
-
-const webpack = require('webpack')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-const path = require('path')
+const webpack = require('webpack');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const path = require('path');
 
 module.exports = (env) => {
-  const DEV = env && env.mode == 'dev'
+  const DEV = env && env.mode === 'dev';
 
-  console.log('************************************')
-  console.log(`Starting in ${DEV ? 'development' : 'production'} mode`)
-  console.log('************************************\n')
+  console.log('************************************');
+  console.log(`Starting in ${DEV ? 'development' : 'production'} mode`);
+  console.log('************************************\n');
 
   return {
     entry: {
@@ -21,15 +19,15 @@ module.exports = (env) => {
 
     output: {
       path: path.resolve(__dirname, 'build'),
-      filename: '[name].js'
+      filename: '[name].js',
     },
 
     resolve: {
       extensions: ['.js'],
       modules: [
         path.resolve('./node_modules'),
-        path.resolve('./src/static')
-      ]
+        path.resolve('./src/static'),
+      ],
     },
 
     module: {
@@ -37,7 +35,7 @@ module.exports = (env) => {
         {
           test: /\.js$/,
           exclude: /node_modules/,
-          loader: 'babel-loader'
+          loader: 'babel-loader',
         },
         {
           test: /\.(css|scss)$/,
@@ -47,58 +45,53 @@ module.exports = (env) => {
                 loader: 'css-loader',
                 options: {
                   minimize: DEV,
-                  sourceMap: DEV
-                }
+                  sourceMap: DEV,
+                },
               },
               {
                 loader: 'sass-loader',
                 options: {
-                  sourceMap: DEV
-                }
-              }
-            ]
-          })
+                  sourceMap: DEV,
+                },
+              },
+            ],
+          }),
         },
         {
           test: /\.(png|jpg|jpeg|gif)$/,
           loader: 'file-loader',
           options: {
-            name (file) {
-              if (DEV) {
-                return 'img/[name].[ext]'
-              }
-              return 'img/[hash].[ext]'
-            }
-          }
-        }
-      ]
+            name: `[${DEV ? 'name' : 'hash'}].[ext]`,
+          },
+        },
+      ],
     },
 
     plugins: [
       new ExtractTextPlugin({
         filename: '[name].css',
-        allChunks: true
+        allChunks: true,
       }),
       new webpack.DefinePlugin({
-        DEV: JSON.stringify(DEV)
+        DEV: JSON.stringify(DEV),
       }),
       new CleanWebpackPlugin(['build']),
-      new UglifyJsPlugin({test: DEV ? /\.disabled/ : /\.js$/}),
+      new UglifyJsPlugin({ test: DEV ? /\.disabled/ : /\.js$/ }),
       new CopyWebpackPlugin([
         {
           from: './src/static-img',
           to: './img',
-          toType: 'dir'
-        }
-      ])
+          toType: 'dir',
+        },
+      ]),
     ],
 
     watch: true,
 
     watchOptions: {
-      aggregateTimeout: 500 // fix ExtractTextPlugin bug
+      aggregateTimeout: 500, // fix ExtractTextPlugin bug
     },
 
-    devtool: DEV ? 'source-map' : ''
-  }
-}
+    devtool: DEV ? 'source-map' : '',
+  };
+};
