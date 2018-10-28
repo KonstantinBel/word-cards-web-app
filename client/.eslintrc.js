@@ -1,15 +1,15 @@
 module.exports = {
-    "extends": "standard",
-    "rules": {
-        "indent": [
-            "error",
-            2
-        ]
+    'extends': 'airbnb-base',
+    'env': {
+        'browser': true,
+        'jest': true,
+        'es6': true,
+        'node': true,
     },
-    "env": {
-        "browser": true,
-        "commonjs": true,
-        "es6": true,
-        "jquery": true
-    }
-}
+    'rules': {
+        'no-console': 'off',
+    },
+    'globals': {
+        'DEV': true,
+    },
+};

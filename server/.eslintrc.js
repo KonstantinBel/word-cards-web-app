@@ -1,19 +1,11 @@
 module.exports = {
-    "globals": {
-        "ReactDOM": false,
-        "React": false
+    "extends": "airbnb-base",
+    'env': {
+        'browser': true,
+        'es6': true,
+        'node': true,
     },
-    "extends": "standard",
-    "rules": {
-        "indent": [
-            "error",
-            2
-        ]
+    'rules': {
+        'no-console': 'off',
     },
-    "env": {
-        "browser": true,
-        "commonjs": true,
-        "es6": true,
-        "jquery": true
-    }
-}
+};

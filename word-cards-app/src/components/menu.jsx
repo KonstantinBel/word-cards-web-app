@@ -1,7 +1,9 @@
-import React from 'react';
-import {Link} from 'react-router-dom'
+// @flow
 
-export default ({ match }) => (
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+export default ({ match }: { match: Object }) => (
   <div>
     <h2>Main app page</h2>
     <ul>
@@ -10,4 +12,4 @@ export default ({ match }) => (
       <li><Link to={`${match.url}/route-example`}>Route example page</Link></li>
     </ul>
   </div>
-)
+);
