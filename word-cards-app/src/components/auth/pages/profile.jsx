@@ -12,7 +12,7 @@ class Profile extends React.Component {
   }
 
   componentDidMount () {
-    elemReqData(`/api/site/profile`)
+    elemReqData(`/word-cards-api/site/profile`)
       .then(res => this.setState({response: res}))
       .catch(err => this.setState({error: err}))
   }

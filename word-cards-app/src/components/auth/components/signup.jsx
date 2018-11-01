@@ -76,14 +76,14 @@ class Signup extends React.Component {
     }
 
     elemReqData(
-      `/api/auth/signup`,
+      `/word-cards-api/auth/signup`,
       'post',
       JSON.stringify(reqData)
     )
       .then(res => {
         if (res.type === 'ok') {
           elemReqData(
-            `/api/auth/signin`,
+            `/word-cards-api/auth/signin`,
             'post',
             JSON.stringify(reqData)
           )

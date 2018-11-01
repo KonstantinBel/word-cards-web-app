@@ -19,7 +19,7 @@ DB_PORT=\
 ACCESS_CONTROL_ALLOW_ORIGIN=http://localhost:3000, ...  (for example)\
 GOOGLE_ID=123qwe123qwe.apps.googleusercontent.com (for example)\
 GOOGLE_SECRET=qqwEQwe12qweq2 (for example)\
-OAUTH_CALLBACK_URL=http://127.0.0.1:3000/api/auth/google/callback (for example, if PORT == 3000)\
+OAUTH_CALLBACK_URL=http://127.0.0.1:3000/word-cards-api/auth/google/callback (for example, if PORT == 3000)\
 SESSION_SECRET=qweqwe (for example)
 ```
 

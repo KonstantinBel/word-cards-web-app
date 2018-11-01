@@ -50,7 +50,7 @@ class Signin extends React.Component {
       password: this.state.pwd
     }
 
-    elemReqData(`/api/auth/signin`,
+    elemReqData(`/word-cards-api/auth/signin`,
       'post',
       JSON.stringify(reqData)
     )
@@ -85,7 +85,7 @@ class Signin extends React.Component {
         </form>
         <p>New user? <Link to={`${this.match.url}/signup`}>Create an account</Link></p>
         <p>or</p>
-        <a href="/api/auth/google">Login with Google account</a>
+        <a href="/word-cards-api/auth/google">Login with Google account</a>
       </div>
     )
   }

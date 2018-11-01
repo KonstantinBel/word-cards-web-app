@@ -12,7 +12,7 @@ class AdminPage extends React.Component {
   }
 
   componentDidMount () {
-    elemReqData(`/api/site/admin-page`)
+    elemReqData(`/word-cards-api/site/admin-page`)
       .then(res => this.setState({response: res}))
       .catch(err => this.setState({error: err}))
   }

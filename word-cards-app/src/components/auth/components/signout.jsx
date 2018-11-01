@@ -10,7 +10,7 @@ class Signout extends React.Component {
   }
 
   handleClick () {
-    elemReqData(`/api/auth/signout`, 'post')
+    elemReqData(`/word-cards-api/auth/signout`, 'post')
       .then(res => {
         if (res.type === 'ok') this.props.changeUser(false)
       })

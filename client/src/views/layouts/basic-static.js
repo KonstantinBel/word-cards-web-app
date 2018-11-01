@@ -1,4 +1,5 @@
 import './basic-static.scss';
+import cookie from 'js-cookie';
 
 (() => {
   if (DEV) {
@@ -9,4 +10,14 @@ import './basic-static.scss';
     elem.style.cssText = 'background: wheat; font-style: italic;';
     body.insertBefore(elem, body.firstElementChild);
   }
+})();
+
+(() => {
+  document.addEventListener('click', (event) => {
+    const { target } = event;
+    if (!target.classList.contains('js-change-locale')) return;
+
+    cookie.set('userlang', target.dataset.lang);
+    window.location.reload();
+  });
 })();

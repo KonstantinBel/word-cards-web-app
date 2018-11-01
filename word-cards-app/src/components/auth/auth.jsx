@@ -31,7 +31,7 @@ export default class Auth extends React.Component<Props, State> {
   }
 
   componentDidMount() {
-    elemReqData('/api/auth/check')
+    elemReqData('/word-cards-api/auth/check')
       .then((res) => {
         this.changeUser(res.arg.username);
       });

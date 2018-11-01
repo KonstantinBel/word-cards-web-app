@@ -1,7 +1,9 @@
-var express = require('express')
-var router = express.Router()
+const express = require('express');
 
-router.use('/auth', require('./auth'))
-router.use('/site', require('./site'))
+const router = express.Router();
 
-module.exports = router
+router.use('/auth', require('./auth'));
+router.use('/site', require('./site'));
+router.use('/get-locale', require('../../controllers/locale'));
+
+module.exports = router;

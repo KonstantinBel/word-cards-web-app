@@ -1,11 +1,11 @@
-const express = require('express')
-const router = express.Router()
+const express = require('express');
 
-const isAuth = require('../../middlewares/check-auth')
-const siteControllers = require('../../controllers/site-controllers')
+const router = express.Router();
+const { checkAuth } = require('../../middlewares');
+const siteControllers = require('../../controllers/site-controllers');
 
-router.get('/profile', isAuth(), siteControllers.profile)
-router.get('/admin-page', isAuth(['admin', 'moderator']), siteControllers.adminPage)
-router.get('/public-page', siteControllers.publicPage)
+router.get('/profile', checkAuth(), siteControllers.profile);
+router.get('/admin-page', checkAuth(['admin', 'moderator']), siteControllers.adminPage);
+router.get('/public-page', siteControllers.publicPage);
 
-module.exports = router
+module.exports = router;

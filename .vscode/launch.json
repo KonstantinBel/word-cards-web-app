@@ -10,7 +10,7 @@
       "name": "Запустить программу",
       "program": "${workspaceFolder}/server/bin/www",
       "envFile": "${workspaceRoot}/server/.env",
-      "args": ["dev", "reset_db"]
+      "args": ["dev"]
     }
   ]
 }

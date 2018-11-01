@@ -1,9 +1,5 @@
 const ResponseError = require('../lib/response-error');
 
-/**
- * Check user group for access to private pages
- */
-
 module.exports = (groups = []) => (
   (req, res, next) => {
     if (!req.isAuthenticated()) {

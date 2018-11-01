@@ -2,7 +2,24 @@
 
 exports[`App есть корректный снимок 1`] = `
 <div>
-  word cards app!
+  <h1>
+    App main page title
+  </h1>
+  <p>
+    App main page content
+  </p>
+  <div>
+    <button
+      onClick={[Function]}
+    >
+      RU
+    </button>
+    <button
+      onClick={[Function]}
+    >
+      EN
+    </button>
+  </div>
   <a
     href="/"
   >

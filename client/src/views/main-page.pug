@@ -7,11 +7,12 @@ block js_bottom
   script(src="main-page.js")
 
 block title
-  title Main page
+  title #{t.mainPage.header}
 
 block content
   .main-page-container
-    h1 Main page
+    h1 #{t.mainPage.header}
+    p #{t.mainPage.mainContent}
     p Lorem ipsum, dolor sit amet consectetur adipisicing elit. Enim amet reprehenderit fuga error sed quaerat modi repellat nemo quasi voluptates sequi rerum quos necessitatibus at blanditiis, iure iusto temporibus! Libero!
     ul
       li

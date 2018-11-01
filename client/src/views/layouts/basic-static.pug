@@ -10,6 +10,8 @@ html
   body
     if devMode
       div(style={background: 'wheat', 'font-style': 'italic'}) Server running in development mode
+    button.js-change-locale(data-lang='ru') RU
+    button.js-change-locale(data-lang='en') EN
 
     block content
 
