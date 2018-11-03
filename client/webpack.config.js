@@ -14,7 +14,8 @@ module.exports = (env) => {
 
   return {
     entry: {
-      'common-script': './src/views/layouts/common-script.js',
+      'basic-static': './src/views/layouts/basic-static.js',
+      'main-page': './src/views/main-page.js',
     },
 
     output: {
@@ -44,7 +45,7 @@ module.exports = (env) => {
               {
                 loader: 'css-loader',
                 options: {
-                  minimize: DEV,
+                  minimize: !DEV,
                   sourceMap: DEV,
                 },
               },

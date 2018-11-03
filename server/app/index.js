@@ -24,7 +24,7 @@ db.init().then(() => {
   console.log('Start app init');
 
   // test query
-  // db.Rubric.findById(1)
+  // db.Rubric.findByPk(1)
   //   .then(rubric => rubric.getDescs())
   //   .then(descs => {console.log(descs);})
 

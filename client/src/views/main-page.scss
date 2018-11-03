@@ -1,0 +1,23 @@
+.main-page-container {
+  color: rebeccapurple;
+}
+
+.company-button {
+  border-radius: 4px; transition-duration: .1s; border: 2px solid transparent; cursor: pointer;
+  &:hover { text-decoration: none; }
+  &.cb-default {
+    background-color: color-calc(blue, 10); color: #fff; padding: 9px 46px; font-size: 16px; 
+    &:hover { background-color: color-calc(blue, 0); }
+    &.link- {
+      background-color: color-calc(blue, 10); color: #fff; padding: 7px 28px; font-size: 14px; 
+      &:hover { background-color: color-calc(blue, 0); }
+    }
+    &.converse- {
+      background-color: #fff; color: color-calc(blue, 10); border: 2px solid color-calc(blue, 10); 
+      &:hover { background-color: color-calc(blue, 10); color: #fff; }
+    }
+  }
+  &.cb-header-search {
+    padding: 9px 46px; font-size: 16px; border-top-left-radius: 0; border-bottom-left-radius: 0;
+  }
+}

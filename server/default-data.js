@@ -15,22 +15,22 @@ module.exports = function (db) {
     .then((user) => {user.createDesc({desc_id: 3, name: 'test desc 3', rubric_id: 1}); return user})
     .then((user) => {user.createDesc({desc_id: 4, name: 'test desc 4', rubric_id: 2}); return user})
 
-    .then(() => db.Desc.findById(1))
+    .then(() => db.Desc.findByPk(1))
     .then((desc) => {desc.createWord({word_id: 1, russian: 'курица', english: 'chicken', german: 'hähnchen'}); return desc})
     .then((desc) => {desc.createWord({word_id: 2, russian: 'говядина', english: 'beef', german: 'rindfleisch'}); return desc})
     .then((desc) => {desc.createWord({word_id: 3, russian: 'свинина', english: 'pork', german: 'schweinefleisch'}); return desc})
 
-    .then(() => db.Desc.findById(2))
+    .then(() => db.Desc.findByPk(2))
     .then((desc) => {desc.createWord({word_id: 4, russian: 'курица', english: 'chicken', german: 'hähnchen'}); return desc})
     .then((desc) => {desc.createWord({word_id: 5, russian: 'говядина', english: 'beef', german: 'rindfleisch'}); return desc})
     .then((desc) => {desc.createWord({word_id: 6, russian: 'свинина', english: 'pork', german: 'schweinefleisch'}); return desc})
 
-    .then(() => db.Desc.findById(3))
+    .then(() => db.Desc.findByPk(3))
     .then((desc) => {desc.createWord({word_id: 7, russian: 'курица', english: 'chicken', german: 'hähnchen'}); return desc})
     .then((desc) => {desc.createWord({word_id: 8, russian: 'говядина', english: 'beef', german: 'rindfleisch'}); return desc})
     .then((desc) => {desc.createWord({word_id: 9, russian: 'свинина', english: 'pork', german: 'schweinefleisch'}); return desc})
 
-    .then(() => db.Desc.findById(4))
+    .then(() => db.Desc.findByPk(4))
     .then((desc) => {desc.createWord({word_id: 10, russian: 'курица', english: 'chicken', german: 'hähnchen'}); return desc})
     .then((desc) => {desc.createWord({word_id: 11, russian: 'говядина', english: 'beef', german: 'rindfleisch'}); return desc})
     .then((desc) => {desc.createWord({word_id: 12, russian: 'свинина', english: 'pork', german: 'schweinefleisch'}); return desc})
