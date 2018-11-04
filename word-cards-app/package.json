@@ -27,7 +27,6 @@
   ],
   "devDependencies": {
     "eslint-config-airbnb": "^17.1.0",
-    "flow-bin": "^0.84.0",
     "react-test-renderer": "^16.6.0"
   }
 }
