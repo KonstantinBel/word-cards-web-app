@@ -65,11 +65,11 @@ module.exports = () => {
       })));
 
   passport.serializeUser((user, done) => {
-    if (user) done(null, user.user_id);
+    if (user) done(null, user.id);
   });
 
   passport.deserializeUser((id, done) => {
-    db.User.findOne({ where: { user_id: id } })
+    db.User.findOne({ where: { id } })
       .then(user => done(null, user))
       .catch(err => done(err, false));
   });

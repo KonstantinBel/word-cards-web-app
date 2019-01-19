@@ -8,7 +8,8 @@
     "prod_reset_db": "node ./bin/www prod reset_db",
     "dev": "nodemon ./bin/www dev",
     "dev_reset_db": "nodemon ./bin/www dev reset_db",
-    "set_demo_data": "nodemon ./bin/www dev reset_db set_demo_data"
+    "set_demo_data": "nodemon ./bin/www dev reset_db set_demo_data",
+    "test": "jest"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -25,6 +26,7 @@
     "express": "^4.16.4",
     "express-locale": "^1.0.5",
     "express-session": "^1.15.6",
+    "jest": "^23.6.0",
     "morgan": "~1.9.0",
     "nocache": "^2.0.0",
     "nodemon": "^1.18.5",

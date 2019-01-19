@@ -1,18 +1,22 @@
-module.exports = function (sequelize, DataTypes) {
+module.exports = (sequelize, DataTypes) => {
   const Word = sequelize.define('Word', {
-    word_id: {
-      type: DataTypes.SMALLINT,
+    id: {
+      type: DataTypes.INTEGER,
       primaryKey: true,
-      autoIncrement: true
+      autoIncrement: true,
     },
-    russian: DataTypes.STRING,
-    english: DataTypes.STRING,
-    german: DataTypes.STRING
-  })
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    transcription: DataTypes.STRING,
+  });
 
   Word.associate = (models) => {
-    Word.belongsToMany(models.Desc, {through: 'WordDesc'})
-  }
+    Word.belongsTo(models.Language);
+    Word.belongsTo(models.Subject);
+    Word.belongsToMany(models.User, { through: models.WordProp });
+  };
 
-  return Word
-}
+  return Word;
+};

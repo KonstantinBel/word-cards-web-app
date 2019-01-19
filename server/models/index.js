@@ -1,17 +1,19 @@
-const Sequelize = require('sequelize')
-const fs = require('fs')
-const path = require('path')
-const basename = path.basename(module.filename)
-const resetDb = global.RESET_DB
-const setDemoData = global.SET_DEMO_DATA
-let db = {}
+const Sequelize = require('sequelize');
+const fs = require('fs');
+const path = require('path');
+const defaultData = require('../default-data');
 
-console.log('Start db init')
+const basename = path.basename(module.filename);
+const resetDb = global.RESET_DB;
+const setDemoData = global.SET_DEMO_DATA;
+const db = {};
+
+console.log('Start db init');
 
 /**
  * Sequelize connection settings
  */
- 
+
 const sequelize = new Sequelize(global.DB_NAME, global.DB_USER, global.DB_PASS, {
   host: global.DB_HOST,
   port: global.DB_PORT,
@@ -27,9 +29,9 @@ const sequelize = new Sequelize(global.DB_NAME, global.DB_USER, global.DB_PASS, 
   },
 
   define: {
-    timestamps: false
-  }
-})
+    timestamps: false,
+  },
+});
 
 /**
  * Add all models to db from files in models dir
@@ -39,40 +41,36 @@ const sequelize = new Sequelize(global.DB_NAME, global.DB_USER, global.DB_PASS, 
 
 fs
   .readdirSync(__dirname)
-  .filter(function (file) {
-    return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js')
-  })
-  .forEach(function (file) {
-    var model = sequelize.import(path.join(__dirname, file))
-    db[model.name] = model
-  })
+  .filter(file => (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js'))
+  .forEach((file) => {
+    const model = sequelize.import(path.join(__dirname, file));
+    db[model.name] = model;
+  });
 
 // execute associate functions (establish links between tables) if exist
-for (const key in db) {
-  if (db.hasOwnProperty(key) && db[key].associate) {
-    db[key].associate(db)
-  }
-}
+Object.keys(db).forEach((key) => { if (db[key].associate) db[key].associate(db); });
 
-db.init = function () {
-  return sequelize
-    .authenticate()
-    .then(() => resetDb ? sequelize.drop() : Promise.resolve)
-    .then(() => this.Session.sync())
-    .then(() => this.User.sync())
-    .then(() => this.Rubric.sync())
-    .then(() => this.Desc.sync())
-    .then(() => this.Word.sync())
-    .then(() => this.Language.sync())
-    .then(() => sequelize.sync())
-    .then(() => setDemoData ? require('../default-data')(this) : Promise.resolve) // настроит кодировку или перейти на postgre
-    .then(() => {
-      console.log('DB connection has been established successfully.')
-    })
-    .catch(err => {
-      console.error('Unable to connect to the database:', err)
-    })
-}
+db.init = () => sequelize
+  .authenticate()
+  .then(() => (resetDb ? sequelize.drop() : Promise.resolve))
+  .then(() => db.Language.sync())
+  .then(() => db.User.sync())
+  .then(() => db.Rubric.sync())
+  .then(() => db.Subject.sync())
+  .then(() => db.Deck.sync())
+  .then(() => db.Word.sync())
+  .then(() => db.DeckSubject.sync())
+  .then(() => db.UserDeck.sync())
+  .then(() => db.WordProp.sync())
+  .then(() => db.Session.sync())
+  .then(() => sequelize.sync())
+  .then(() => (setDemoData ? defaultData(db) : Promise.resolve))
+  .then(() => {
+    console.log('DB connection has been established successfully.');
+  })
+  .catch((err) => {
+    console.error('Unable to connect to the database:', err);
+  });
 
-db.sequelize = sequelize
-module.exports = db
+db.sequelize = sequelize;
+module.exports = db;

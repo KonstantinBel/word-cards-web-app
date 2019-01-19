@@ -1,44 +1,68 @@
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcryptjs');
 
-module.exports = function (sequelize, DataTypes) {
+module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
-    user_id: {
+    id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      autoIncrement: true
+      autoIncrement: true,
     },
     access_group: {
-      type: DataTypes.STRING,
-      defaultValue: 'user'
+      type: DataTypes.ENUM('user', 'editor', 'admin'),
+      defaultValue: 'user',
     },
     email: {
       type: DataTypes.STRING,
-      isEmail: true,
-      unique: true
+      unique: true,
+      allowNull: false,
+      validate: {
+        isEmail: true,
+      },
     },
     local_name: {
       type: DataTypes.STRING,
-      unique: true
+      unique: true,
+      validate: {
+        len: [2, 50],
+      },
+    },
+    google_name: DataTypes.STRING,
+    google_id: {
+      type: DataTypes.STRING,
+      unique: true,
+    },
+    google_token: {
+      type: DataTypes.STRING,
+      unique: true,
     },
     password: DataTypes.STRING,
-    google_name: DataTypes.STRING,
-    google_id: DataTypes.STRING,
-    google_token: DataTypes.STRING,
-  })
-
-  User.beforeSave((user, options) => {
-    if (user.password) {
-      return bcrypt.hash(user.password, 10)
-        .then(res => {
-          user.password = res
-        })
-        .catch(err => console.log(err))
-    }
-  })
+  }, {
+    validate: {
+      hasName() {
+        if (!this.local_name && !this.google_name) {
+          throw new Error('Requires user name');
+        }
+      },
+    },
+  });
 
   User.associate = (models) => {
-    User.belongsToMany(models.Desc, {through: 'UserDesc'})
-  }
+    User.belongsTo(models.Language);
+    User.belongsToMany(models.Deck, { through: models.UserDeck });
+    User.belongsToMany(models.Word, { through: models.WordProp });
+  };
 
-  return User
-}
+  User.beforeSave((user) => {
+    if (user.password) {
+      return bcrypt.hash(user.password, 10)
+        .then((res) => {
+          // eslint-disable-next-line no-param-reassign
+          user.password = res;
+        })
+        .catch(err => console.log(err));
+    }
+    return false;
+  });
+
+  return User;
+};

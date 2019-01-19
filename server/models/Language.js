@@ -1,12 +1,21 @@
-module.exports = function (sequelize, DataTypes) {
+module.exports = (sequelize, DataTypes) => {
   const Language = sequelize.define('Language', {
-    language_id: {
+    id: {
       type: DataTypes.SMALLINT,
       primaryKey: true,
-      autoIncrement: true
+      autoIncrement: true,
     },
-    name: DataTypes.STRING
-  })
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
+  });
 
-  return Language
-}
+  Language.associate = (models) => {
+    Language.hasMany(models.User);
+    Language.hasMany(models.Word);
+  };
+
+  return Language;
+};

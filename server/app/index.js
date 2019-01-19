@@ -25,11 +25,6 @@ const app = express();
 const accessLogStream = fs.createWriteStream(path.join(global.PROJECT_DIR, '/server/access.log'), { flags: 'a' });
 
 db.init().then(() => {
-  // test query
-  // db.Rubric.findByPk(1)
-  //   .then(rubric => rubric.getDescs())
-  //   .then(descs => {console.log(descs);})
-
   // init passport strategis
   initPassport();
 
