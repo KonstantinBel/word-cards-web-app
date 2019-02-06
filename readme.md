@@ -29,15 +29,15 @@ REACT_APP_SERVER=http://localhost:3011 (for example)
 ```
 
 - create new empty data base
-- install npm packages in server, client, word-cards-app folders - '''npm i'''
-- build word-cards-app - '''npm run build'''
-- start static client webpack - '''npm run prod'''
-- start server - '''npm run prod'''
+- install npm packages in server, client, word-cards-app folders - ```npm i```
+- build word-cards-app - ```npm run build```
+- start static client webpack - ```npm run prod```
+- start server - ```npm run prod```
 
 ## Comands
-- server/ ```npm run dev/prod''' (running server in development or production mode)
-- client/ ```npm run dev/prod''' (running frontend building in development or production mode)
-- word-cards-app/ ```npm run start/bundle''' (running react app server in development or bundle in production mode)
+- server/ ```npm run dev/prod``` (running server in development or production mode)
+- client/ ```npm run dev/prod``` (running frontend building in development or production mode)
+- word-cards-app/ ```npm run start/bundle``` (running react app server in development or bundle in production mode)
 
 ## Состав проекта
 - ExpressJS сервер который выступает в качестве сервера статики и сервера API
